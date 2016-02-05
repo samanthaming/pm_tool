@@ -23,4 +23,22 @@ Rails.application.routes.draw do
 
   resources :projects
 
+  ## CRUD: Tasks
+
+  # Create
+  # get "/tasks/new" => "tasks#new", as: :new_task
+  # post "/tasks" => "tasks#create", as: :tasks
+  #
+  # # Read
+  # get "/tasks" => "tasks#index"
+  # get "/tasks/:id" => "tasks#show", as: :task
+  #
+  # # Update
+  # get "/tasks/:id/edit" => "tasks#edit", as: :edit_task
+  # patch "/tasks/:id" => "tasks#update"
+  #
+  # # Destroy
+  # delete "/tasks/:id" => "tasks#destroy"
+
+  resources :tasks
 end

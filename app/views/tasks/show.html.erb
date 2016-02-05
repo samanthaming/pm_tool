@@ -1,0 +1,14 @@
+<h1>Show Task</h1>
+
+<h2><%= @task.title %></h2>
+<p><%= @task.due_date.strftime("due on %B %d, %Y") %></p>
+
+<p><%= link_to "Edit Task", edit_task_path(@task) %></p>
+
+<p><%= link_to "Show all tasks", tasks_path %></p>
+
+<hr>
+
+<p><%= link_to "Delete Task", task_path(@task),
+                              method: :delete,
+                              date: { confirm: "Are you sure?" } %></p>
