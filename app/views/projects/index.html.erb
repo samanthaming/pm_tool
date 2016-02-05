@@ -1,0 +1,19 @@
+<h1>All Projects</h1>
+
+<p><%= link_to "Create Project", new_project_path %></p>
+
+<ul>
+  <% @projects.each do |project| %>
+  <li>
+    <h2><%= link_to project.title, project_path(project) %></h2>
+    <p><%= project.description %></p>
+    <% if project.due_date.is_a? Time %>
+    <%= project.due_date.strftime("due on %B %d, %Y")  %>
+    <!-- project.due_date.try(:strftime,"due on %B %d, %Y") -->
+    <% else %>
+    <%= project.due_date %>
+    <% end %>
+
+  </li>
+  <% end %>
+</ul>
