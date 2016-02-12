@@ -37,12 +37,12 @@
 
 <% if @project.tasks.any? %>
   <h2>Done Tasks</h2>
-  <%= render "task_list", tasks: @project.tasks.status(true), project: @project %>
-  <%# render "task_list", tasks: @project.tasks.status.done, project: @project %>
+    <%= render "task_list", tasks: @project.tasks.done(true), project: @project %>
+    <%# render "task_list", tasks: @project.tasks.status.done, project: @project %>
 
   <h2>Undone Tasks</h2>
-  <%= render "task_list", tasks: @project.tasks.status(false), project: @project %>
-  <%# render "task_list", tasks: @project.tasks.status.undone, project: @project %>
+    <%= render "task_list", tasks: @project.tasks.done(false), project: @project %>
+    <%# render "task_list", tasks: @project.tasks.status.undone, project: @project %>
 <% end %>
 
 <hr>

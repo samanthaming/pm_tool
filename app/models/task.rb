@@ -1,6 +1,8 @@
 class Task < ActiveRecord::Base
   belongs_to :project
 
+  after_initialize :set_defaults
+
   validates :title, presence: true, uniqueness: { scope: :project_id}
   validates :due_date, date: { after: Proc.new { Time.now } }
   validates :body, presence: true
@@ -9,7 +11,7 @@ class Task < ActiveRecord::Base
   # scope :done, -> {where(done: true)}
   # scope :undone, -> {where(done: false)}
 
-  scope :status, -> (status) { where(done: status)  }
+  scope :done, -> (done) { where(done: done )  }
 
 
   private
