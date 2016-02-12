@@ -1,11 +1,66 @@
 <h1><%= @project.title %></h1>
 <p><%= @project.description %></p>
 
-<p><%= link_to "Edit", edit_project_path(@project) %></p>
+<p>
+  <%= link_to "Edit", edit_project_path(@project) %>
+  <%= link_to "Delete",
+                  project_path(@project),
+                  method: :delete,
+                  date: { confirm: "Are you sure?" } %>
+</p>
 
-<p><%= link_to "Delete",
-                project_path(@project),
-                method: :delete,
-                date: { confirm: "Are you sure?" } %></p>
+<h2>Tasks</h2>
 
+<% if @task.errors.any? %>
+<ul>
+  <% @task.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= form_for [@project, @task] do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :due_date %>
+    <%= f.text_field :due_date %>
+  </div>
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit %>
+<% end %>
+
+<% if @project.tasks.any? %>
+
+  <ul>
+  <% @project.tasks.order("status ASC").each do |task| %>
+    <li>
+      <div><%= task.title %></div>
+      <div><%= task.due_date.strftime("due on %B %d, %Y") %></div>
+      <div><%= task.body %></div>
+
+        <% if task.done? %>
+          <%= button_to "undone",
+                mark_done_task_path({id: task, project_id: @project}),
+                method: :patch %>
+        <% else %>
+          <%= button_to "done",
+                mark_done_task_path({id: task, project_id: @project}),
+                method: :patch %>
+        <% end %>
+
+        <%= link_to "Delete", project_task_path(@project, task),
+                                  method: :delete,
+                                  data: {confirm: "Are you sure?"} %>
+      </li>
+  <% end %>
+  </ul>
+<% end %>
+
+<hr>
 <p><%= link_to "Back to projects", projects_path %></p>

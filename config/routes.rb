@@ -21,7 +21,12 @@ Rails.application.routes.draw do
   # delete "/projects/:id" => "projects#Destroy"
 
 
-  resources :projects
+  resources :projects do
+    resources :tasks, only: [:create, :destroy]
+  end
+
+  patch "/projects/:id/mark_done" => "tasks#mark_done", as: :mark_done_task
+
 
   ## CRUD: Tasks
 
@@ -40,5 +45,5 @@ Rails.application.routes.draw do
   # # Destroy
   # delete "/tasks/:id" => "tasks#destroy"
 
-  resources :tasks
+  # resources :tasks
 end

@@ -27,6 +27,7 @@ class ProjectsController < ApplicationController
 
   def show
     # @project = Project.find params[:id]
+    @task = Task.new
   end
 
   # Update
@@ -39,6 +40,7 @@ class ProjectsController < ApplicationController
     if @project.update project_params
       redirect_to project_path(@project), notice: "Project updated successfully"
     else
+      flash[:alert] = "Project not updated successfully"
       render :edit
     end
   end
