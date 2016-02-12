@@ -1,0 +1,30 @@
+<ul>
+<% tasks.each do |task| %>
+<%# @project.tasks.order("status ASC").each do |task| %>
+
+  <li>
+    <div><%= task.title %></div>
+    <div><%= task.due_date.strftime("due on %B %d, %Y") %></div>
+    <div><%= task.body %></div>
+      <%= task_done_button(project, task) %>
+
+
+      <!-- 
+
+      <% if task.done? %>
+      <%= button_to "undone",
+      mark_done_task_path({id: task, project_id: project}),
+      method: :patch %>
+      <% else %>
+      <%= button_to "done",
+      mark_done_task_path({id: task, project_id: project}),
+      method: :patch %>
+      <% end %>
+    -->
+
+      <%= link_to "Delete", project_task_path(project, task),
+                                method: :delete,
+                                data: {confirm: "Are you sure?"} %>
+    </li>
+<% end %>
+</ul>

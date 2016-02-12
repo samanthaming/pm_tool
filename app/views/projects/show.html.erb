@@ -36,30 +36,13 @@
 <% end %>
 
 <% if @project.tasks.any? %>
+  <h2>Done Tasks</h2>
+  <%= render "task_list", tasks: @project.tasks.status(true), project: @project %>
+  <%# render "task_list", tasks: @project.tasks.status.done, project: @project %>
 
-  <ul>
-  <% @project.tasks.order("status ASC").each do |task| %>
-    <li>
-      <div><%= task.title %></div>
-      <div><%= task.due_date.strftime("due on %B %d, %Y") %></div>
-      <div><%= task.body %></div>
-
-        <% if task.done? %>
-          <%= button_to "undone",
-                mark_done_task_path({id: task, project_id: @project}),
-                method: :patch %>
-        <% else %>
-          <%= button_to "done",
-                mark_done_task_path({id: task, project_id: @project}),
-                method: :patch %>
-        <% end %>
-
-        <%= link_to "Delete", project_task_path(@project, task),
-                                  method: :delete,
-                                  data: {confirm: "Are you sure?"} %>
-      </li>
-  <% end %>
-  </ul>
+  <h2>Undone Tasks</h2>
+  <%= render "task_list", tasks: @project.tasks.status(false), project: @project %>
+  <%# render "task_list", tasks: @project.tasks.status.undone, project: @project %>
 <% end %>
 
 <hr>
