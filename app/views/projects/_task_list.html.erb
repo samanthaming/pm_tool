@@ -8,10 +8,29 @@
     <div>
       <%= task_done_button(project, task) %>
 
+<<<<<<< HEAD
       <%= button_to "Delete", project_task_path(project, task),
       method: :delete,
       data: {confirm: "Are you sure?"} %>
     </div>
+=======
+
+      <!-- 
+      <% if task.done? %>
+        <%= button_to "undone",
+        mark_done_task_path({id: task, project_id: project}),
+        method: :patch %>
+      <% else %>
+        <%= button_to "done",
+        mark_done_task_path({id: task, project_id: project}),
+        method: :patch %>
+      <% end %>
+    -->
+
+      <%= link_to "Delete", project_task_path(project, task),
+                                method: :delete,
+                                data: {confirm: "Are you sure?"} %>
+>>>>>>> 536834121e3880ec966579e8ee448d6af5d9a556
     </li>
 <% end %>
 </ul>
