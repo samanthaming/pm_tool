@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
 
   # READ
   def index
-    @projects = Project.order("id DESC")
+    @projects = Project.order("id DESC").page params[:page]
   end
 
   def show

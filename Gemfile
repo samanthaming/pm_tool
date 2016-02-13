@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 gem 'date_validator'
-
+gem 'kaminari'
 
 gem "faker", "~> 1.6.1"
 

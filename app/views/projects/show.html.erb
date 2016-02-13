@@ -9,6 +9,7 @@
                   date: { confirm: "Are you sure?" } %>
 </p>
 
+<hr>
 <h2>Tasks</h2>
 
 <% if @task.errors.any? %>
@@ -36,6 +37,7 @@
 <% end %>
 
 <% if @project.tasks.any? %>
+  <hr>
   <h2>Done Tasks</h2>
     <%= render "task_list", tasks: @project.tasks.done(true), project: @project %>
     <%# render "task_list", tasks: @project.tasks.status.done, project: @project %>
@@ -46,4 +48,4 @@
 <% end %>
 
 <hr>
-<p><%= link_to "Back to projects", projects_path %></p>
+<p><%= link_to "Back to Projects", projects_path %></p>
