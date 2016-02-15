@@ -11,23 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160212021106) do
+ActiveRecord::Schema.define(version: 20160215000226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
-    t.text     "body",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "body",          null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "discussion_id"
   end
+
+  add_index "comments", ["discussion_id"], name: "index_comments_on_discussion_id", using: :btree
 
   create_table "discussions", force: :cascade do |t|
     t.string   "title",       null: false
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "project_id"
   end
+
+  add_index "discussions", ["project_id"], name: "index_discussions_on_project_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "title",       null: false
@@ -50,5 +56,7 @@ ActiveRecord::Schema.define(version: 20160212021106) do
 
   add_index "tasks", ["project_id"], name: "index_tasks_on_project_id", using: :btree
 
+  add_foreign_key "comments", "discussions"
+  add_foreign_key "discussions", "projects"
   add_foreign_key "tasks", "projects"
 end

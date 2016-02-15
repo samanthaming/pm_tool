@@ -9,43 +9,11 @@
                   date: { confirm: "Are you sure?" } %>
 </p>
 
-<hr>
-<h2>Tasks</h2>
+<p>
+  <h4><%= link_to "Discussions", project_discussions_path(@project) %></h4>
+</p>
 
-<% if @task.errors.any? %>
-<ul>
-  <% @task.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
-</ul>
-<% end %>
-
-<%= form_for [@project, @task] do |f| %>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  <div>
-    <%= f.label :due_date %>
-    <%= f.text_field :due_date %>
-  </div>
-  <div>
-    <%= f.label :body %>
-    <%= f.text_area :body %>
-  </div>
-  <%= f.submit %>
-<% end %>
-
-<% if @project.tasks.any? %>
-  <hr>
-  <h2>Done Tasks</h2>
-    <%= render "task_list", tasks: @project.tasks.done(true), project: @project %>
-    <%# render "task_list", tasks: @project.tasks.status.done, project: @project %>
-
-  <h2>Undone Tasks</h2>
-    <%= render "task_list", tasks: @project.tasks.done(false), project: @project %>
-    <%# render "task_list", tasks: @project.tasks.status.undone, project: @project %>
-<% end %>
+<%= render "projects/task" %>
 
 <hr>
 <p><%= link_to "Back to Projects", projects_path %></p>

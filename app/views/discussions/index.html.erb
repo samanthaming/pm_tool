@@ -1,0 +1,31 @@
+<h1><%= @project.title %></h1>
+
+<%= link_to "Back", project_path(@project) %>
+
+<h2>Discussion</h2>
+
+<%= render "discussions/form" %>
+
+<% if @project.discussions.any? %>
+  <ul class="discussion-list">
+
+    <% @project.discussions.each do |discuss| %>
+    <li>
+      <h4 class="title"><%= discuss.title %></h4>
+      <p><%= discuss.description %></p>
+      <div class="action">
+        <%= link_to "Edit", edit_project_discussion_path(@project, discuss) %>
+
+        <%= button_to "Delete", project_discussion_path(@project, discuss),
+              method: :delete,
+              data: {confirm: "Are you sure?"} %>
+      </div>
+
+
+      <%= render "discussions/comment", discuss: discuss %>
+
+    </li>
+    <% end %>
+  </ul>
+
+<% end %>

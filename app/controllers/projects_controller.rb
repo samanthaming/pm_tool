@@ -28,6 +28,7 @@ class ProjectsController < ApplicationController
   def show
     # @project = Project.find params[:id]
     @task = Task.new
+    @discussion = Discussion.new
   end
 
   # Update
@@ -56,7 +57,7 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    project_params = params.require(:project).permit(:title,:description,:due_date)
+    params.require(:project).permit(:title,:description,:due_date)
   end
 
   def find_project

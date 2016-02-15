@@ -1,0 +1,26 @@
+<% if @discussion.errors.any? %>
+<ul>
+  <% @discussion.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+
+<%= form_for [@project, @discussion] do |f|%>
+<div>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+<div>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+</div>
+<div>
+  <%= f.submit %>
+  
+  <!-- HOW TO IMPLEMENT??? -->
+  <%# "Cancel" if current_page? url_for(edit_project_discussion_path(@projct, @discussion) ) %>
+  <%# "Cancel" if current_page?( controller: 'discussion', action: 'edit', project_id: @project.id, id: @discussion.id  ) %>
+</div>
+<% end %>

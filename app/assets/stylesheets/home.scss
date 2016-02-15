@@ -28,6 +28,20 @@ ul{
     display:inline-block;
   }
 }
+.discussion-list{
+  list-style: none; margin:20px 0; padding:0;
+
+  .title{
+    margin:0;
+    background-color: teal;
+    color:plum;
+    padding:10px 5px;
+  }
+
+  .action{
+    & *{display: inline-block;}
+  }
+}
 
 input[value="Delete"]{
   border:1px solid tomato;
@@ -35,5 +49,13 @@ input[value="Delete"]{
 
   &:hover{
     background-color: tomato;
+  }
+}
+
+table{
+  border-collapse: collapse;
+  width:100%;
+  &, th, td{
+    border: 1px solid grey;
   }
 }

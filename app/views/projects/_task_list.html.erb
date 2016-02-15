@@ -1,36 +1,30 @@
-<ul class="task-list">
-<% tasks.each do |task| %>
+<table class="task-list">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th>Due Date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
 
-  <li>
-    <h4><%= task.title %></h4>
-    <div><%= task.body %></div>
-    <div><strong>Due on: </strong><%= task.due_date.strftime("%B %d, %Y") %></div>
-    <div>
-      <%= task_done_button(project, task) %>
 
-<<<<<<< HEAD
-      <%= button_to "Delete", project_task_path(project, task),
-      method: :delete,
-      data: {confirm: "Are you sure?"} %>
-    </div>
-=======
+  <% tasks.each do |task| %>
 
-      <!-- 
-      <% if task.done? %>
-        <%= button_to "undone",
-        mark_done_task_path({id: task, project_id: project}),
-        method: :patch %>
-      <% else %>
-        <%= button_to "done",
-        mark_done_task_path({id: task, project_id: project}),
-        method: :patch %>
-      <% end %>
-    -->
+    <tr>
+      <td><%= task.title %></td>
+      <td><%= task.body %></td>
+      <td><%= task.due_date.strftime("%B %d, %Y") %></td>
+      <td>
+        <%= task_done_button(project, task) %>
 
-      <%= link_to "Delete", project_task_path(project, task),
-                                method: :delete,
-                                data: {confirm: "Are you sure?"} %>
->>>>>>> 536834121e3880ec966579e8ee448d6af5d9a556
-    </li>
-<% end %>
-</ul>
+        <%= button_to "Delete", project_task_path(project, task),
+        method: :delete,
+        data: {confirm: "Are you sure?"} %>
+      </td>
+    </tr>
+
+  <% end %>
+  </tbody>
+</table>
