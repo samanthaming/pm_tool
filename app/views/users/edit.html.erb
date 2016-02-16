@@ -5,7 +5,7 @@
   <% @user.errors.full_messages.each do |error| %>
     <li><%= error %></li>
   <% end %>
-</ul>  
+</ul>
 <% end %>
 
 <%= form_for @user do |f| %>
@@ -23,3 +23,7 @@
   </div>
   <%= f.submit %>
 <% end %>
+
+<hr>
+
+<%= link_to "Change Password", edit_password_path %>
