@@ -2,11 +2,15 @@
 <p><%= @project.description %></p>
 
 <p>
-  <%= link_to "Edit", edit_project_path(@project) %>
-  <%= link_to "Delete",
-                  project_path(@project),
-                  method: :delete,
-                  date: { confirm: "Are you sure?" } %>
+  <% if can? :manage, @project %>
+    <%= link_to "Edit", edit_project_path(@project) %>
+
+    <%= link_to "Delete",
+                    project_path(@project),
+                    method: :delete,
+                    date: { confirm: "Are you sure?" } %>
+
+  <% end %>
 </p>
 
 <p>

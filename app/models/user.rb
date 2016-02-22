@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
 
+  has_many :projects, dependent: :destroy
+  
   validates :password, length: {minimum: 6}, on: :create
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -9,7 +11,4 @@ class User < ActiveRecord::Base
                     format: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
 
-  def user_first_name 
-
-  end
 end

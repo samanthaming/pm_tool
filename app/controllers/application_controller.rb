@@ -17,5 +17,15 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  def authenticate_user(user)
+    redirect_to new_session_path, notice: "Please sign in" unless user_signed_in?
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+
+    exception.default_message = "Default error message"
+    redirect_to root_path, :alert => exception.message
+  end
+
 
 end

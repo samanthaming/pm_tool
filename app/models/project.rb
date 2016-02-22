@@ -1,7 +1,8 @@
 class Project < ActiveRecord::Base
+  belongs_to :user
   has_many :tasks, dependent: :nullify
   has_many :discussions, dependent: :destroy
-  
+
   validates :title, presence: true, uniqueness: true
   validates :due_date, date:{ after: Proc.new { Time.now } }
 

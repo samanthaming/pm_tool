@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
-
   before_action :find_project, only: [:show, :edit, :destroy, :update]
+  # authorize_resource
+  # skip_authorize_resource only: [:index, :show]
+  before_action :authorize_user,except: [:new, :show, :index]
 
   # CREATE
 
@@ -11,6 +13,7 @@ class ProjectsController < ApplicationController
   def create
     # project_params = params.require(:project).permit(:name, :description, :due_date)
     @project = Project.new project_params
+    @project.user = current_user
 
     if @project.save
       redirect_to project_path(@project), notice: "Project created successfully"
@@ -62,5 +65,11 @@ class ProjectsController < ApplicationController
 
   def find_project
     @project = Project.find params[:id]
+  end
+
+  def authorize_user
+    unless can? :manage, @project
+      redirect_to root_path, alert: "Access Denied"
+    end
   end
 end
