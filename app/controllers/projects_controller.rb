@@ -2,7 +2,8 @@ class ProjectsController < ApplicationController
   before_action :find_project, only: [:show, :edit, :destroy, :update]
   # authorize_resource
   # skip_authorize_resource only: [:index, :show]
-  before_action :authorize_user,except: [:new, :show, :index]
+  before_action :authenticate_user, except: [:index, :show]
+  before_action :authorize_user,only: [:edit, :update, :destroy]
 
   # CREATE
 
