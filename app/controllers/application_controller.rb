@@ -27,5 +27,12 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
-
+  def is_author_of? (model, user=current_user)
+    if model.has_attribute? :user_id
+      model.user_id == current_user.id ? true : false
+    else
+      false
+    end
+  end
+  helper_method :is_author_of?
 end

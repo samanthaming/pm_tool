@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :tasks, only: [:create, :destroy]
     resources :discussions, only: [:create, :destroy, :index, :edit, :update]
+    resources :favorites, only: [:create, :destroy]
   end
 
   patch "/projects/:project_id/mark_done/:id" => "tasks#mark_done", as: :mark_done_task
@@ -22,4 +23,6 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection
   end
+
+  resources :favorites, only: [:index]
 end

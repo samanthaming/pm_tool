@@ -1,6 +1,16 @@
 <h1><%= @project.title %></h1>
 <p><%= @project.description %></p>
 
+<strong>(<%= @project.favorites.count %> Favorites)</strong>
+
+<% favorite = @project.favorite_for current_user %>
+
+<% if favorite%>
+  <%= link_to "Un-Like", project_favorite_path(@project, favorite), method: :delete %>
+<% else %>
+  <%= link_to "Like", project_favorites_path(@project), method: :post %>
+<% end %>
+
 <p>
   <% if can? :manage, @project %>
     <%= link_to "Edit", edit_project_path(@project) %>

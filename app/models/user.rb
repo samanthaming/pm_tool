@@ -2,7 +2,10 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :projects, dependent: :destroy
-  
+
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_projects, through: :favorites, source: :project
+
   validates :password, length: {minimum: 6}, on: :create
   validates :first_name, presence: true
   validates :last_name, presence: true
