@@ -1,4 +1,4 @@
-<table class="task-list">
+<table id="task-list">
   <thead>
     <tr>
       <th>Title</th>
@@ -8,23 +8,8 @@
     </tr>
   </thead>
   <tbody>
-
-
-  <% tasks.each do |task| %>
-
-    <tr>
-      <td><%= task.title %></td>
-      <td><%= task.body %></td>
-      <td><%= task.due_date.strftime("%B %d, %Y") %></td>
-      <td>
-        <%= task_done_button(project, task) %>
-
-        <%= button_to "Delete", project_task_path(project, task),
-        method: :delete,
-        data: {confirm: "Are you sure?"} %>
-      </td>
-    </tr>
-
-  <% end %>
+    <% tasks.each do |task| %>
+      <%= render "tasks/task", {project: @project, task: task} %>
+    <% end %>
   </tbody>
 </table>

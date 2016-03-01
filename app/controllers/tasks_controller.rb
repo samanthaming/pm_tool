@@ -6,10 +6,14 @@ class TasksController < ApplicationController
     @task = Task.new task_params
     @task.project = @project
 
-    if @task.save
-      redirect_to project_path(@project), notice: "Task Created"
-    else
-      render "/projects/show"
+    respond_to do |format|
+      if @task.save
+        format.html{redirect_to project_path(@project), notice: "Task Created"}
+        format.js { render :create_success }
+      else
+        format.html{render "/projects/show"}
+        format.js { render :create_failure }
+      end
     end
   end
 
@@ -17,7 +21,11 @@ class TasksController < ApplicationController
     @project = Project.find params[:project_id]
     @task = Task.find params[:id]
     @task.destroy
-    redirect_to project_path(@project), notice: "Task Deleted"
+
+    respond_to do |format|
+      format.html{redirect_to project_path(@project), notice: "Task Deleted"}
+      format.js { render } #this renders /views/tasks/destroy.js.erb
+    end
   end
 
   def mark_done

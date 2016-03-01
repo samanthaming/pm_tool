@@ -27,7 +27,24 @@
   <h4><%= link_to "Discussions", project_discussions_path(@project) %></h4>
 </p>
 
-<%= render "projects/task" %>
+<!-- Tasks -->
+<hr>
+<h2>Tasks</h2>
+<div id="task-form">
+  <%= render "tasks/form" %>
+</div>
+
+<% if @project.tasks.any? %>
+
+  <% if @project.tasks.done(true).any? %>
+  <h2>Done Tasks</h2>
+    <%= render "projects/task_list", tasks: @project.tasks.done(true), project: @project %>
+  <% end %>
+
+  <h2>Undone Tasks</h2>
+    <%= render "projects/task_list", tasks: @project.tasks.done(false), project: @project %>
+<% end %>
+
 
 <hr>
 <p><%= link_to "Back to Projects", projects_path %></p>

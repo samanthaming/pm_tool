@@ -1,0 +1,4 @@
+$('#task-list').find('tbody').prepend("<%= j render 'task', {project: @project, task: @task } %>")
+
+<% @task = Task.new %>
+$('#task-form').html("<%= j render 'form' %>")

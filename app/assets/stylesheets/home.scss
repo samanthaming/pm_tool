@@ -23,7 +23,7 @@ ul{
   }
 }
 
-.task-list{
+#task-list{
   .button_to{
     display:inline-block;
   }
@@ -57,5 +57,10 @@ table{
   width:100%;
   &, th, td{
     border: 1px solid grey;
+  }
+}
+.field_with_errors{
+  textarea,input[type="text"] {
+    border: 1px solid red;
   }
 }
