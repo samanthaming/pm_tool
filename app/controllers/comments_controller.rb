@@ -6,20 +6,29 @@ class CommentsController < ApplicationController
     @comment = Comment.new comment_params
     @comment.discussion = @discussion
 
-    if @comment.save
-      redirect_to project_discussions_path(@project), notice: "Comment Created"
-    else
-      flash[:alert] = "Comment not created"
-      render "/discussions/index"
+    respond_to do |format|
+      if @comment.save
+        format.html {redirect_to project_discussions_path(@project), notice: "Comment Created"}
+        format.js { render :create_success }
+      else
+        format.html{
+          flash[:alert] = "Comment not created"
+          render "/discussions/index"
+        }
+        format.js { render :create_failure }
+      end
     end
-
   end
 
 
   def destroy
     @comment = Comment.find params[:id]
     @comment.destroy
-    redirect_to project_discussions_path(@project), notice: "Comment Removed"
+
+    respond_to do |format|
+      format.html{redirect_to project_discussions_path(@project), notice: "Comment Removed"}
+      format.js { render } # this renders /views/comments/destroy.js.erb
+    end
   end
 
   private

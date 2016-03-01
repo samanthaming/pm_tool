@@ -1,0 +1,4 @@
+$('#comment-list').prepend("<%= j render 'comment', {discuss: @discussion, comment: @comment} %>")
+
+<% @comment = Comment.new %>
+$('#comment-form').html("<%= j render 'discussions/comment_form', discuss: @discussion %>")

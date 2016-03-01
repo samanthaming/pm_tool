@@ -22,7 +22,21 @@
       </div>
 
 
-      <%= render "discussions/comment", discuss: discuss %>
+      <%# render "discussions/discuss_comment", discuss: discuss %>
+      <br>
+      <div>
+        <div id="comment-form">
+          <%= render "discussions/comment_form", discuss: discuss %>
+        </div>
+
+        <% if discuss.comments.any? %>
+          <ul id="comment-list">
+            <% discuss.comments.order("created_at DESC").each do |comment| %>
+              <%= render 'comments/comment', {discuss: discuss, comment: comment} %>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
 
     </li>
     <% end %>

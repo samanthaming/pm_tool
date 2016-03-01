@@ -1,0 +1,10 @@
+<li id="<%= dom_id(comment) %>">
+  <p><%= comment.body %></p>
+  <div class="action">
+    <%= button_to "delete", discussion_comment_path(discuss, comment),
+          method: :delete,
+          remote: true,
+          data: { confirm: "Are you sure?"}
+    %>
+  </div>
+</li>

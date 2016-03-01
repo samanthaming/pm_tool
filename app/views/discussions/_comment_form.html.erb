@@ -6,7 +6,7 @@
   <% end %>
 </div>
 
-<%= form_for [discuss, @comment] do |f| %>
+<%= form_for [discuss, @comment], remote: true do |f| %>
   <%= f.text_area :body, placeholder: "Enter your comment..." %>
   <%= f.submit %>
 <% end %>
